@@ -7,7 +7,7 @@ def solution(distance, rocks, n):
     left, right = 0, distance
     while left <= right:
         mid = (left + right) // 2
-        min_distance = float('inf')
+        min_distance = float('inf') # 아주 큰 값을 할당
         current = 0
         remove_cnt = 0
 
@@ -26,4 +26,4 @@ def solution(distance, rocks, n):
             left = mid + 1
     return answer
 
-print(solution(25, [2, 14, 11, 21, 17], 2))
+print(solution(25, [2, 14, 11, 21, 17], 1))
