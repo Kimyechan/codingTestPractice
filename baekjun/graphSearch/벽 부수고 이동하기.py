@@ -1,3 +1,4 @@
+# 벽을 부순 경우와 안 부순 경우의 최단 거리를 따로 계산
 from collections import deque
 
 N, M = map(int, input().split())
