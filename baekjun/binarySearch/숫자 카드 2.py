@@ -19,6 +19,7 @@ for valueFind in cardGiven:
     else:
         print(0, end=" ")
 
+# 이분 탐색은 시간 초과
 # def binarySearch(cardList, value):
 #     if len(cardList) == 0:
 #         return 0
