@@ -30,27 +30,3 @@ for _ in range(t):
         result = min(result, math.sqrt(sumV[0] ** 2 + sumV[1] ** 2))
 
     print('%.12f' % result)
-
-# n = int(input())
-# v = []
-# for _ in range(n):
-#     x, y = map(int, input().split())
-#     v.append([x, y])
-#
-# endV = combinations(v, n // 2)
-# result = sys.maxsize
-# for endV in combinations(v, n // 2):
-#     startV = deepcopy(v)
-#     sumV = [0, 0]
-#     for e in endV:
-#         sumV[0] += e[0]
-#         sumV[1] += e[1]
-#         startV.remove(e)
-#
-#     for s in startV:
-#         sumV[0] -= s[0]
-#         sumV[1] -= s[1]
-#
-#     result = min(result, math.sqrt(sumV[0] ** 2 + sumV[1] ** 2))
-#
-# print(result)
