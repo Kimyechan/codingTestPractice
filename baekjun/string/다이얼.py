@@ -1,7 +1,7 @@
 word = input()
 
 dial = dict()
-print(zip(['ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ']))
+
 dial['ABC'] = 2
 dial['DEF'] = 3
 dial['GHI'] = 4
