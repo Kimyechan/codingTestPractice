@@ -1,3 +1,4 @@
+# check
 def solution(number, k):
     stack = []
     for i, num in enumerate(number):
