@@ -60,33 +60,71 @@
 # print(solution("ABABAAAAABA")) #11
 
 
+# def solution(name):
+#     make_name = [min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name]
+#     idx, answer = 0, 0
+#     while True:
+#         answer += make_name[idx]
+#         make_name[idx] = 0
+#         if sum(make_name) == 0:
+#             break
+#         left, right = 1, 1
+#         while make_name[idx - left] == 0:
+#             left += 1
+#         while make_name[(idx + right) % len(name)] == 0:
+#             right += 1
+#
+#         answer += left if left < right else right
+#         idx += -left if left < right else right
+#
+#     return answer
+
 def solution(name):
-    make_name = [min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name]
-    idx, answer = 0, 0
-    while True:
-        answer += make_name[idx]
-        make_name[idx] = 0
-        if sum(make_name) == 0:
+    defaultName = "A" * len(name)
+    defaultName = list(defaultName)
+    name = list(name)
+    location = 0
+
+    moveCount = 0
+    while defaultName != name:
+        moveUp = ord(name[location]) - ord('A')
+        moveDown = ord('Z') - ord(name[location]) + 1
+        defaultName[location] = name[location]
+        moveCount += moveUp if moveUp < moveDown else moveDown
+
+        if defaultName == name:
             break
-        left, right = 1, 1
-        while make_name[idx - left] == 0:
-            left += 1
-        while make_name[(idx + right) % len(name)] == 0:
-            right += 1
 
-        answer += left if left < right else right
-        idx += -left if left < right else right
+        leftMove = 0
+        leftTempLocation = location
+        while True:
+            leftTempLocation -= 1
+            leftMove += 1
+            if name[leftTempLocation] != 'A' and name[leftTempLocation] != defaultName[leftTempLocation]:
+                break
 
-    return answer
+        rightMove = 0
+        rightTempLocation = location
+        while True:
+            rightTempLocation += 1
+            if rightTempLocation >= len(name):
+                rightTempLocation = len(name) - 1
+            rightMove += 1
+            if name[rightTempLocation] != 'A' and name[rightTempLocation] != defaultName[rightTempLocation]:
+                break
+
+        if leftMove < rightMove:
+            location = leftTempLocation
+            moveCount += leftMove
+        else:
+            location = rightTempLocation
+            moveCount += rightMove
+
+    return moveCount
 
 
-
-
-
-
-
-
-
-
-
-
+print(solution("JEROEN"))
+print(solution("JAN"))
+print(solution("JAZ"))
+print(solution("AAB"))
+print(solution("ABCDEFGHIJKABCMEON"))
