@@ -1,37 +1,37 @@
 # check
 # m, n -> dp[n][m]
-def solution(m, n, puddles):
-    dp = [[0] * m for _ in range(n)]
-
-    for i in range(m):
-        dp[0][i] = 1
-
-    for i in range(n):
-        dp[i][0] = 1
-
-    for puddle in puddles:
-        if puddle[1] - 1 == 0:
-            for i in range(puddle[0] - 1, m):
-                dp[puddle[1] - 1][i] = -1
-        elif puddle[0] - 1 == 0:
-            for i in range(puddle[1] - 1, n):
-                dp[i][puddle[0] - 1] = -1
-        else:
-            dp[puddle[1] - 1][puddle[0] - 1] = -1
-
-    for i in range(1, m):
-        for j in range(1, n):
-            if dp[j][i] == -1:
-                continue
-            left = dp[j - 1][i] if dp[j - 1][i] != -1 else 0
-            top = dp[j][i - 1] if dp[j][i - 1] != -1 else 0
-            dp[j][i] = (left + top) % 1000000007
-
-    return dp[n - 1][m - 1] % 1000000007
-
-
-print(solution(4, 3, [[2, 2], [1, 2], [2, 1]]))
-print(solution(5, 4, [[3, 4]]))
+# def solution(m, n, puddles):
+#     dp = [[0] * m for _ in range(n)]
+#
+#     for i in range(m):
+#         dp[0][i] = 1
+#
+#     for i in range(n):
+#         dp[i][0] = 1
+#
+#     for puddle in puddles:
+#         if puddle[1] - 1 == 0:
+#             for i in range(puddle[0] - 1, m):
+#                 dp[puddle[1] - 1][i] = -1
+#         elif puddle[0] - 1 == 0:
+#             for i in range(puddle[1] - 1, n):
+#                 dp[i][puddle[0] - 1] = -1
+#         else:
+#             dp[puddle[1] - 1][puddle[0] - 1] = -1
+#
+#     for i in range(1, m):
+#         for j in range(1, n):
+#             if dp[j][i] == -1:
+#                 continue
+#             left = dp[j - 1][i] if dp[j - 1][i] != -1 else 0
+#             top = dp[j][i - 1] if dp[j][i - 1] != -1 else 0
+#             dp[j][i] = (left + top) % 1000000007
+#
+#     return dp[n - 1][m - 1] % 1000000007
+#
+#
+# print(solution(4, 3, [[2, 2], [1, 2], [2, 1]]))
+# print(solution(5, 4, [[3, 4]]))
 
 
 # def solution(m,n,puddles):
@@ -50,5 +50,57 @@ print(solution(5, 4, [[3, 4]]))
 #             grid[j][k] = (grid[j][k-1] + grid[j-1][k])%1000000007   #[a,b] = [a-1,b] + [a,b-1] 공식
 #
 #     return grid[n][m]
+
+
+def solution(m, n, puddles):
+    routes = [[0] * m for _ in range(n)]
+
+    for i in range(n):
+        routes[i][0] = 1
+
+    for i in range(m):
+        routes[0][i] = 1
+
+    for puddle in puddles:
+        if puddle[0] == 1: # m
+            for i in range(puddle[1] - 1, n):
+                routes[i][0] = -1
+        elif puddle[1] == 1: # n
+            for i in range(puddle[0] - 1, m):
+                routes[0][i] = -1
+        else:
+            routes[puddle[1] - 1][puddle[0] - 1] = -1
+
+    for i in range(1, n):
+        for j in range(1, m):
+            if routes[i][j] == 0:
+                left = routes[i][j - 1] if routes[i][j - 1] != -1 else 0
+                top = routes[i - 1][j] if routes[i - 1][j] != -1 else 0
+                routes[i][j] = (left + top) % 1000000007
+
+    return routes[n - 1][m - 1]
+
+
+print(solution(4, 3, [[2, 2]]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
