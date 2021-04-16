@@ -61,33 +61,85 @@
 # print(result)
 
 
-import sys
-sys.setrecursionlimit(1000000)
+# import sys
+# sys.setrecursionlimit(1000000)
+#
+# s = input()
+# t = input()
+# result = 0
+#
+#
+# def checkCanChange(s, t):
+#     global result
+#     if len(s) == len(t):
+#         if s == t:
+#             result = 1
+#         return
+#
+#     if t[0] == "B":
+#         t.reverse()
+#         t.pop()
+#         checkCanChange(s, t)
+#         t.append("B")
+#         t.reverse()
+#
+#     if t[-1] == "A":
+#         t.pop()
+#         checkCanChange(s, t)
+#         t.append("A")
+#
+#
+# checkCanChange(list(s), list(t))
+# print(result)
 
 s = input()
 t = input()
+
 result = 0
 
 
-def checkCanChange(s, t):
+def checkCorrect(s, t):
     global result
     if len(s) == len(t):
         if s == t:
             result = 1
+            return
         return
 
     if t[0] == "B":
         t.reverse()
         t.pop()
-        checkCanChange(s, t)
+        checkCorrect(s, t)
         t.append("B")
         t.reverse()
 
     if t[-1] == "A":
         t.pop()
-        checkCanChange(s, t)
+        checkCorrect(s, t)
         t.append("A")
 
 
-checkCanChange(list(s), list(t))
+checkCorrect(list(s), list(t))
 print(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

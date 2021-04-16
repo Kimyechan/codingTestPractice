@@ -1,17 +1,56 @@
-# check
-T = int(input())
+# check check
+# T = int(input())
+#
+# for _ in range(T):
+#     n = int(input())
+#     coins = map(int, input().split())
+#     m = int(input())
+#
+#     dp = [0] * (m + 1)
+#     for coin in coins:
+#         for x in range(coin, m + 1):
+#             if x == coin:
+#                 dp[x] = dp[x] + 1
+#             else:
+#                 dp[x] = dp[x] + dp[x - coin]
+#
+#     print(dp[-1])
 
-for _ in range(T):
+t = int(input())
+
+for _ in range(t):
     n = int(input())
-    coins = map(int, input().split())
-    m = int(input())
+    coins = list(map(int, input().split()))
+    money = int(input())
 
-    dp = [0] * (m + 1)
+    dp = [0] * (money + 1)
+
     for coin in coins:
-        for x in range(coin, m + 1):
-            if x == coin:
-                dp[x] = dp[x] + 1
+        for i in range(coin, money + 1):
+            if coin == i:
+                dp[i] = dp[i] + 1
             else:
-                dp[x] = dp[x] + dp[x - coin]
+                dp[i] = dp[i] + dp[i - coin]
 
     print(dp[-1])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
