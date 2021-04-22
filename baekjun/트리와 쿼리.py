@@ -28,10 +28,10 @@
 # for _ in range(Q):
 #     q = int(sys.stdin.readline())
 #     print(node_count[q])
-# import sys
-# from collections import defaultdict
-# sys.setrecursionlimit(1000000)
-#
+import sys
+from collections import defaultdict
+sys.setrecursionlimit(1000000)
+
 N, R, Q = map(int, input().split())
 
 tree = defaultdict(list)
@@ -77,8 +77,7 @@ for _ in range(Q):
 #         if visited[y]: continue
 #         cache[x] += dfsDP(y)
 #     return cache[x]
-
-
-dfsDP(R - 1)
-for _ in range(Q):
-    print(cache[int(input()) - 1])
+#
+# dfsDP(R - 1)
+# for _ in range(Q):
+#     print(cache[int(input()) - 1])
