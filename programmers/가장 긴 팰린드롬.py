@@ -1,7 +1,6 @@
 def solution(s):
     maxLen = 1
     for center in range(len(s) - 1):
-        countOdd = 0
         countEven = 0
         if s[center] == s[center + 1]:
             dis = 1
