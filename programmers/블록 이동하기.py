@@ -50,6 +50,57 @@
 #                 que.append((*nxt, count + 1))
 #                 confirm.add(nxt)
 
+# from collections import deque
+#
+#
+# def getMoveList(cur1, cur2, newBoard):
+#     cand = []
+#     dx = [1, -1, 0, 0]
+#     dy = [0, 0, 1, -1]
+#
+#     for i in range(4):
+#         if newBoard[cur1[0] + dx[i]][cur1[1] + dy[i]] != 1 and newBoard[cur2[0] + dx[i]][cur2[1] + dy[i]] != 1:
+#             newCur1 = (cur1[0] + dx[i], cur1[1] + dy[i])
+#             newCur2 = (cur2[0] + dx[i], cur2[1] + dy[i])
+#             cand.append((newCur1, newCur2))
+#
+#     if cur1[0] == cur2[0]:  # 가로에서 세로로 회전
+#         for d in [-1, 1]:
+#             if newBoard[cur1[0] + d][cur1[1]] != 1 and newBoard[cur2[0] + d][cur2[1]] != 1:
+#                 cand.append(((cur1[0], cur1[1]), (cur1[0] + d, cur1[1])))
+#                 cand.append(((cur2[0], cur2[1]), (cur2[0] + d, cur2[1])))
+#     else:
+#         for d in [-1, 1]:
+#             if newBoard[cur1[0]][cur1[1] + d] != 1 and newBoard[cur2[0]][cur2[1] + d] != 1:
+#                 cand.append(((cur1[0], cur1[1]), (cur1[0], cur1[1] + d)))
+#                 cand.append(((cur2[0], cur2[1]), (cur2[0], cur2[1] + d)))
+#
+#     return cand
+#
+#
+# def solution(board):
+#     n = len(board)
+#     newBoard = [list([1] * (n + 2)) for _ in range(n + 2)]
+#
+#     for i in range(n):
+#         newBoard[i + 1][1:n + 1] = board[i]
+#
+#     q = deque([((1, 1), (1, 2), 0)])
+#     visited = set([((1, 1), (1, 2))])
+#
+#     while q:
+#         cur1, cur2, count = q.popleft()
+#         if cur1 == (n, n) or cur2 == (n, n):
+#             return count
+#
+#         for move in getMoveList(cur1, cur2, newBoard):
+#             if move not in visited:
+#                 q.append((move[0], move[1], count + 1))
+#                 visited.add(move)
+#
+#
+# print(solution([[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]]))
+
 from collections import deque
 
 
@@ -59,19 +110,19 @@ def getMoveList(cur1, cur2, newBoard):
     dy = [0, 0, 1, -1]
 
     for i in range(4):
-        if newBoard[cur1[0] + dx[i]][cur1[1] + dy[i]] != 1 and newBoard[cur2[0] + dx[i]][cur2[1] + dy[i]] != 1:
-            newCur1 = (cur1[0] + dx[i], cur1[1] + dy[i])
-            newCur2 = (cur2[0] + dx[i], cur2[1] + dy[i])
+        newCur1 = (cur1[0] + dx[i], cur1[1] + dy[i])
+        newCur2 = (cur2[0] + dx[i], cur2[1] + dy[i])
+        if newBoard[newCur1[0]][newCur1[1]] == 0 and newBoard[newCur2[0]][newCur2[1]] == 0:
             cand.append((newCur1, newCur2))
 
-    if cur1[0] == cur2[0]:  # 가로에서 세로로 회전
+    if cur1[0] == cur2[0]:  # 가로
         for d in [-1, 1]:
-            if newBoard[cur1[0] + d][cur1[1]] != 1 and newBoard[cur2[0] + d][cur2[1]] != 1:
+            if newBoard[cur1[0] + d][cur1[1]] == 0 and newBoard[cur2[0] + d][cur2[1]] == 0:
                 cand.append(((cur1[0], cur1[1]), (cur1[0] + d, cur1[1])))
                 cand.append(((cur2[0], cur2[1]), (cur2[0] + d, cur2[1])))
     else:
         for d in [-1, 1]:
-            if newBoard[cur1[0]][cur1[1] + d] != 1 and newBoard[cur2[0]][cur2[1] + d] != 1:
+            if newBoard[cur1[0]][cur1[1] + d] == 0 and newBoard[cur2[0]][cur2[1] + d] == 0:
                 cand.append(((cur1[0], cur1[1]), (cur1[0], cur1[1] + d)))
                 cand.append(((cur2[0], cur2[1]), (cur2[0], cur2[1] + d)))
 
@@ -79,24 +130,22 @@ def getMoveList(cur1, cur2, newBoard):
 
 
 def solution(board):
+    answer = 0
     n = len(board)
     newBoard = [list([1] * (n + 2)) for _ in range(n + 2)]
 
-    for i in range(n):
-        newBoard[i + 1][1:n + 1] = board[i]
+    for i in range(1, n + 1):
+        newBoard[i][1:n + 1] = board[i - 1]
 
     q = deque([((1, 1), (1, 2), 0)])
-    visited = set([((1, 1), (1, 2))])
+    passLocation = set([((1, 1), (1, 2))])
 
     while q:
         cur1, cur2, count = q.popleft()
         if cur1 == (n, n) or cur2 == (n, n):
             return count
 
-        for move in getMoveList(cur1, cur2, newBoard):
-            if move not in visited:
-                q.append((move[0], move[1], count + 1))
-                visited.add(move)
-
-
-print(solution([[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]]))
+        for robot in getMoveList(cur1, cur2, newBoard):
+            if robot not in passLocation:
+                passLocation.add(robot)
+                q.append((robot[0], robot[1], count + 1))
