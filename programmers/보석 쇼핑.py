@@ -1,4 +1,4 @@
-# check
+# check #check
 def solution(gems):
     n = len(gems)
     setLen = len(set(gems))
@@ -29,3 +29,33 @@ def solution(gems):
 
     answer = [answer[0] + 1, answer[1] + 1]
     return answer
+
+
+# def solution(gems):
+#     answer = [0, len(gems) - 1]
+#     start = 0
+#     end = 0
+#     gemDict = dict()
+#     gemDict[gems[0]] = 1
+#     allKindSet = set(gems)
+#
+#     while start <= len(gems) and end <= len(gems):
+#         if len(gemDict) == len(allKindSet):
+#             if answer[1] - answer[0] > end - start:
+#                 answer = [start, end]
+#             if gemDict[gems[start]] == 1:
+#                 del gemDict[gems[start]]
+#             else:
+#                 gemDict[gems[start]] -= 1
+#             start += 1
+#         else:
+#             end += 1
+#             if end == len(gems):
+#                 break
+#             if gemDict.get(gems[end]) == None:
+#                 gemDict[gems[end]] = 1
+#             else:
+#                 gemDict[gems[end]] += 1
+#
+#     answer = [answer[0] + 1, answer[1] + 1]
+#     return answer
