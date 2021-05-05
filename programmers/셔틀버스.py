@@ -15,11 +15,38 @@
 #             bus_arrive = (60 * 9) + i * t
 #             if timetable[j] <= bus_arrive:
 #                 del timetable[j]
+
+
+# def solution(n, t, m, timetable):
+#     answer = 0
+#     timeMinute = [int(time[:2]) * 60 + int(time[3:5]) for time in timetable]
+#     timeMinute.sort()
+#     lastTime = 60 * 9 + t * (n - 1)
+#
+#     for i in range(n):
+#         if len(timeMinute) < m:
+#             answer = lastTime
+#             break
+#         if i == n - 1:
+#             if timeMinute[m - 1] <= lastTime:
+#                 lastTime = timeMinute[m - 1] - 1
+#             answer = lastTime
+#             break
+#         else:
+#             busTime = 60 * 9 + i * t
+#             for j in range(m - 1, -1, -1):
+#                 if timeMinute[j] <= busTime:
+#                     del timeMinute[j]
+#
+#     result = "%02d:%02d" % (lastTime // 60, lastTime % 60)
+#     return result
+
+
 def solution(n, t, m, timetable):
     answer = 0
     timeMinute = [int(time[:2]) * 60 + int(time[3:5]) for time in timetable]
     timeMinute.sort()
-    lastTime = 60 * 9 + t * (n - 1)
+    lastTime = 9 * 60 + (n - 1) * t
 
     for i in range(n):
         if len(timeMinute) < m:
@@ -27,14 +54,13 @@ def solution(n, t, m, timetable):
             break
         if i == n - 1:
             if timeMinute[m - 1] <= lastTime:
-                lastTime = timeMinute[m - 1] - 1
-            answer = lastTime
+                answer = timeMinute[m - 1] - 1
+            else:
+                answer = lastTime
             break
-        else:
-            busTime = 60 * 9 + i * t
-            for j in range(m - 1, -1, -1):
-                if timeMinute[j] <= busTime:
-                    del timeMinute[j]
+        for j in range(m - 1, -1, -1):
+            if timeMinute[j] <= 9 * 60 + i * t:
+                del timeMinute[j]
 
-    result = "%02d:%02d" % (lastTime // 60, lastTime % 60)
+    result = "%02d:%02d" % (answer // 60, answer % 60)
     return result
