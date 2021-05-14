@@ -46,4 +46,5 @@ def solution(a):
 
     return answer
 
+
 print(solution([9, -1, -5]))
