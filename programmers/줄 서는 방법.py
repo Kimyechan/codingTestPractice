@@ -1,22 +1,22 @@
 # check
-def solution(n, k):
-    answer = []
-    numbers = [i for i in range(1, n + 1)]
-
-    values = []
-    value = 1
-    for i in range(1, n):
-        value *= i
-        values.append(value)
-
-    for i in range(n - 2, -1, -1):
-        idx = (k - 1) // values[i]
-        k = k % values[i]
-        answer.append(numbers[idx])
-        numbers.pop(idx)
-
-    answer.append(numbers[0])
-    return answer
+# def solution(n, k):
+#     answer = []
+#     numbers = [i for i in range(1, n + 1)]
+#
+#     values = []
+#     value = 1
+#     for i in range(1, n):
+#         value *= i
+#         values.append(value)
+#
+#     for i in range(n - 2, -1, -1):
+#         idx = (k - 1) // values[i]
+#         k = k % values[i]
+#         answer.append(numbers[idx])
+#         numbers.pop(idx)
+#
+#     answer.append(numbers[0])
+#     return answer
 
 # from math import factorial
 #
@@ -32,6 +32,25 @@ def solution(n, k):
 #         k %= fact
 #
 #     return answer
+
+
+def solution(n, k):
+    answer = []
+
+    numbers = [i for i in range(1, n + 1)]
+    factorial = []
+    num = 1
+    for i in range(1, n):
+        num *= i
+        factorial.append(num)
+
+    for i in range(1, n):
+        idx = (k - 1) // factorial[n - i - 1]
+        k = k % factorial[n - i - 1]
+        answer.append(numbers.pop(idx))
+
+    answer.append(numbers[0])
+    return answer
 
 
 print(solution(3, 5))
