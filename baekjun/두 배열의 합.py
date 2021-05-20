@@ -59,29 +59,107 @@
 #     print(count)
 
 
+# import sys
+# from collections import defaultdict
+#
+# t = int(input())
+# n = int(input())
+# listA = list(map(int, sys.stdin.readline().split()))
+# m = int(input())
+# listB = list(map(int, sys.stdin.readline().split()))
+#
+# nSumDict = defaultdict(int)
+#
+# for i in range(n):
+#     sum = 0
+#     for j in range(i, n):
+#         sum += listA[j]
+#         nSumDict[sum] += 1
+#
+# result = 0
+# for i in range(m):
+#     sum = 0
+#     for j in range(i, m):
+#         sum += listB[j]
+#         if nSumDict[t - sum] != 0:
+#             result += nSumDict[t - sum]
 import sys
-from collections import defaultdict
 
-t = int(input())
-n = int(input())
-listA = list(map(int, sys.stdin.readline().split()))
-m = int(input())
-listB = list(map(int, sys.stdin.readline().split()))
+t = int(sys.stdin.readline())
+n = int(sys.stdin.readline())
+aList = list(map(int, sys.stdin.readline().split()))
+m = int(sys.stdin.readline())
+bList = list(map(int, sys.stdin.readline().split()))
 
-nSumDict = defaultdict(int)
-
+aSumList = []
 for i in range(n):
     sum = 0
     for j in range(i, n):
-        sum += listA[j]
-        nSumDict[sum] += 1
+        sum += aList[j]
+        aSumList.append(sum)
 
-result = 0
+bSumList = []
 for i in range(m):
     sum = 0
     for j in range(i, m):
-        sum += listB[j]
-        if nSumDict[t - sum] != 0:
-            result += nSumDict[t - sum]
+        sum += bList[j]
+        bSumList.append(sum)
+
+bSumList.sort()
+result = 0
+for aSum in aSumList:
+    remainSum = t - aSum
+
+    start = 0
+    end = len(bSumList) - 1
+    while start < end:
+        mid = (start + end) // 2
+        if bSumList[mid] >= remainSum:
+            end = mid
+        else:
+            start = mid + 1
+    startIndex = end
+
+    start = 0
+    end = len(bSumList) - 1
+    while start < end:
+        mid = (start + end) // 2
+        if bSumList[mid] > remainSum:
+            end = mid
+        else:
+            start = mid + 1
+    endIndex = end
+
+    if bSumList[endIndex] == remainSum:
+        result += endIndex - startIndex + 1
+    else:
+        result += endIndex - startIndex
 
 print(result)
+
+
+# 7
+# 4
+# 1 3 1 2
+# 3
+# 1 3 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# print(result)
