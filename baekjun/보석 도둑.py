@@ -18,6 +18,8 @@
 #         result += -heapq.heappop(possibleWeight)
 #
 # print(result)
+
+
 import sys
 import heapq
 
