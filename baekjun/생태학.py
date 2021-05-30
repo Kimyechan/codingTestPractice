@@ -16,4 +16,4 @@ treeList = list(treeSet)
 treeList.sort()
 for tree in treeList:
     percent = treeDict[tree] * 100 / totalCount
-    print("%s %0.4f" %(tree, percent))
+    print("%s %0.4f" % (tree, percent))
