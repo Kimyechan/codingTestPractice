@@ -59,16 +59,3 @@ else:
             k -= flag
 
     print(result)
-
-
-
-
-
-
-
-
-
-
-
-
-
